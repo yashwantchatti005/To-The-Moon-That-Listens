@@ -1570,28 +1570,39 @@ button{
   height:560px;
 }
 
-.author-moon{
+.author-photo{
 
   width:220px;
-  aspect-ratio:1;
+  height:220px;
 
   border-radius:50%;
 
-  background:
-
-    radial-gradient(
-      circle at 35% 30%,
-      #fffef2,
-      #dad8cf 58%,
-      #a7acad
-    );
-
-  box-shadow:
-    0 0 100px rgba(230,235,226,.16);
+  overflow:hidden;
 
   position:relative;
-
   z-index:2;
+
+  border:1px solid rgba(255,255,255,.18);
+
+  box-shadow:
+    0 0 60px rgba(230,235,226,.12),
+    0 25px 60px rgba(0,0,0,.35);
+
+  background:#111;
+}
+
+.author-photo img{
+
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  object-position:center 25%;
+
+  display:block;
+
+  transform:scale(1.02);
 }
 
 .author-initials{
@@ -2457,6 +2468,390 @@ footer{
 
 }
 
+
+/* =========================================================
+   CINEMATIC ENHANCEMENT LAYER
+   Original structure, typography and content preserved.
+   ========================================================= */
+
+:root{
+  --cine-ease:cubic-bezier(.16,1,.3,1);
+  --cine-slow:cubic-bezier(.22,.61,.36,1);
+}
+
+/* Deep filmic atmosphere */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:7990;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 42%, transparent 28%, rgba(0,0,0,.08) 62%, rgba(0,0,0,.42) 100%),
+    linear-gradient(180deg, rgba(0,0,0,.12), transparent 18%, transparent 82%, rgba(0,0,0,.2));
+  opacity:.82;
+  mix-blend-mode:multiply;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:7991;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,.018), transparent 8%, transparent 92%, rgba(255,255,255,.018)),
+    radial-gradient(circle at 50% 50%, transparent 48%, rgba(0,0,0,.18) 100%);
+  opacity:.55;
+}
+
+/* Fine cinematic vignette */
+.cine-vignette{
+  position:fixed;
+  inset:-10%;
+  z-index:7989;
+  pointer-events:none;
+  background:radial-gradient(ellipse at center, transparent 48%, rgba(0,0,0,.3) 100%);
+  opacity:.45;
+  transform:scale(1.02);
+  transition:opacity 1.2s ease;
+}
+
+/* Soft anamorphic light */
+.cine-flare{
+  position:fixed;
+  width:min(48vw,760px);
+  height:1px;
+  left:50%;
+  top:34%;
+  z-index:-1;
+  pointer-events:none;
+  transform:translate(-50%,-50%) scaleX(.7);
+  background:linear-gradient(90deg, transparent, rgba(200,225,235,.04) 18%, rgba(220,240,245,.15) 50%, rgba(200,225,235,.04) 82%, transparent);
+  filter:blur(1px);
+  opacity:.35;
+  transition:opacity 1.2s ease, transform 1.5s var(--cine-slow);
+}
+.hero:hover .cine-flare{opacity:.6;transform:translate(-50%,-50%) scaleX(1)}
+
+/* Film-frame breathing */
+.hero,
+.statement,
+.interlude,
+.closing{
+  isolation:isolate;
+}
+
+.hero::after,
+.statement::after,
+.interlude::after,
+.closing::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  opacity:.7;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.035), transparent 13%, transparent 87%, rgba(0,0,0,.12)),
+    radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,.12) 100%);
+}
+
+/* Existing hero gains depth without changing layout */
+.hero{
+  background-attachment:fixed;
+}
+
+.hero-moon{
+  will-change:transform,filter;
+  transition:
+    transform 1.8s var(--cine-slow),
+    filter 1.2s ease;
+  filter:brightness(.98) contrast(1.03);
+}
+
+.hero:hover .hero-moon{
+  filter:brightness(1.04) contrast(1.05);
+}
+
+.book-wrap{
+  will-change:transform;
+  transform-origin:center center;
+}
+
+.book-wrap img{
+  backface-visibility:hidden;
+  transform:translateZ(0);
+}
+
+/* More cinematic button light */
+.btn{
+  box-shadow:0 0 0 rgba(220,235,238,0);
+  transition:
+    color .4s ease,
+    transform .7s var(--cine-slow),
+    border-color .4s ease,
+    box-shadow .7s ease;
+}
+.btn:hover{
+  box-shadow:0 14px 40px rgba(0,0,0,.16), 0 0 35px rgba(205,225,230,.045);
+}
+.btn span{
+  display:inline-block;
+  transition:transform .55s var(--cine-slow);
+}
+.btn:hover span{
+  transform:translate(4px,-4px);
+}
+
+/* Header becomes more glass-like while retaining original design */
+.site-header.scrolled{
+  box-shadow:0 18px 55px rgba(0,0,0,.12);
+}
+
+/* Scroll reveals: slightly more filmic */
+.reveal{
+  transition:
+    opacity 1.35s var(--cine-slow),
+    transform 1.35s var(--cine-slow),
+    filter 1.35s var(--cine-slow);
+  filter:blur(5px);
+}
+.reveal.visible{
+  filter:blur(0);
+}
+
+/* Text shimmer only on major display headings */
+.hero-title,
+.statement-title,
+.excerpt-heading h2,
+.book-heading,
+.themes-heading h2,
+.author-copy h2,
+.buy-heading,
+.closing-title{
+  text-shadow:0 1px 0 rgba(255,255,255,.025);
+}
+
+/* Excerpts feel like photographed pages */
+.excerpt{
+  overflow:hidden;
+}
+.excerpt::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:0;
+  background:linear-gradient(115deg, transparent 20%, rgba(255,255,255,.055) 48%, transparent 62%);
+  transform:translateX(-120%);
+  transition:opacity .4s ease, transform 1.2s var(--cine-slow);
+}
+.excerpt:hover::before{
+  opacity:1;
+  transform:translateX(120%);
+}
+
+/* Themes get a restrained editorial glow */
+.theme{
+  position:relative;
+}
+.theme::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-1px;
+  width:0;
+  height:1px;
+  background:currentColor;
+  opacity:.22;
+  transition:width .9s var(--cine-slow);
+}
+.theme:hover::after{width:100%}
+
+/* Author moon breathing */
+.author-photo{
+  width:165px;
+  height:165px;
+}
+@keyframes cineMoonBreath{
+  0%,100%{transform:scale(1);filter:brightness(1)}
+  50%{transform:scale(1.018);filter:brightness(1.035)}
+}
+
+/* Interlude atmospheric pulse */
+.interlude::before{
+  animation:cineHalo 10s ease-in-out infinite;
+}
+@keyframes cineHalo{
+  0%,100%{transform:scale(.94);opacity:.7}
+  50%{transform:scale(1.06);opacity:1}
+}
+
+/* Closing moon slow breathing */
+.closing-moon{
+  animation:cineClosingMoon 14s ease-in-out infinite;
+}
+@keyframes cineClosingMoon{
+  0%,100%{transform:scale(.96);opacity:.11}
+  50%{transform:scale(1.035);opacity:.17}
+}
+
+/* Floating words drift */
+.floating-word{
+  transition:opacity 1s ease;
+}
+
+/* Subtle page-edge light */
+.section::before{
+  pointer-events:none;
+}
+
+/* Cinematic focus mode while scrolling */
+body.cine-scrolling .cine-vignette{
+  opacity:.62;
+}
+body.cine-scrolling .stars{
+  opacity:.9;
+}
+
+/* Loading screen gets a restrained film reveal */
+.loader{
+  background:
+    radial-gradient(circle at 50% 45%, rgba(44,78,96,.16), transparent 30%),
+    var(--night-deep);
+}
+.loader-inner{
+  animation:cineLoaderFloat 2s ease-in-out infinite;
+}
+@keyframes cineLoaderFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-4px)}
+}
+
+/* Desktop cinematic letterbox bars — extremely subtle */
+.cine-bars::before,
+.cine-bars::after{
+  content:"";
+  position:fixed;
+  left:0;
+  right:0;
+  height:18px;
+  z-index:7998;
+  pointer-events:none;
+  background:linear-gradient(180deg, rgba(0,0,0,.5), transparent);
+}
+.cine-bars::before{top:0}
+.cine-bars::after{
+  bottom:0;
+  transform:rotate(180deg);
+}
+
+/* Keep accessibility / reduced motion */
+@media(max-width:900px){
+  body::before{opacity:.72}
+  .hero{background-attachment:scroll}
+  .cine-flare{width:85vw}
+}
+
+@media(max-width:620px){
+  .cine-vignette{opacity:.32}
+  .cine-flare{top:28%;opacity:.22}
+  .cine-bars::before,
+  .cine-bars::after{height:10px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .author-moon,
+  .closing-moon,
+  .interlude::before,
+  .loader-inner{animation:none!important}
+  .reveal{filter:none!important}
+}
+
+/* =========================================================
+   BOOK CLICK — GENTLE LIFT TOWARD SCREEN
+========================================================= */
+
+.book-wrap{
+  cursor:pointer;
+  transform-style:preserve-3d;
+}
+
+.book-wrap.book-lift{
+  transform:
+    perspective(1200px)
+    translate3d(0,-70px,180px)
+    rotate(0deg)
+    scale(1.12) !important;
+
+  filter:
+    drop-shadow(0 45px 55px rgba(0,0,0,.65))
+    drop-shadow(0 0 35px rgba(220,230,235,.12));
+
+  transition:
+    transform 1.15s cubic-bezier(.16,1,.3,1),
+    filter 1.15s ease;
+}
+
+.book-wrap.book-lift img{
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.12),
+    0 20px 60px rgba(0,0,0,.35);
+}
+
+/* =========================================================
+   MOBILE — BOOK LIFT
+========================================================= */
+
+@media (max-width: 620px){
+
+  .book-wrap{
+    width:245px;
+    cursor:pointer;
+    transform-origin:center center;
+  }
+
+  .book-wrap.book-lift{
+    transform:
+      perspective(900px)
+      translate3d(0,-38px,70px)
+      rotate(0deg)
+      scale(1.08) !important;
+
+    filter:
+      drop-shadow(0 28px 35px rgba(0,0,0,.58))
+      drop-shadow(0 0 25px rgba(220,230,235,.10));
+
+    transition:
+      transform 1s cubic-bezier(.16,1,.3,1),
+      filter 1s ease;
+  }
+
+  .book-wrap.book-lift img{
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.10),
+      0 15px 35px rgba(0,0,0,.3);
+  }
+
+  /* Make the moon react subtly on mobile */
+  .hero-moon{
+    transition:
+      transform 1.2s cubic-bezier(.16,1,.3,1),
+      filter 1s ease;
+  }
+
+  .hero-moon.book-moon-active{
+    filter:
+      brightness(1.08)
+      contrast(1.04);
+
+    transform:
+      translateY(-10px)
+      scale(1.035);
+  }
+}
+
 </style>
 </head>
 
@@ -2781,8 +3176,10 @@ footer{
 
     <blockquote>
 
-      “Not everything asks to make sense.<br>
-      Some things are simply carried forward.”
+      “The words will remain the same each time you return.
+What changes is what you notice,<br>
+     and what you are ready
+to listen to.”
 
     </blockquote>
 
@@ -2809,13 +3206,11 @@ footer{
     <h2 class="statement-title">
 
       <span>
-        Some pages may
-        feel familiar.
+The words will remain the same.
       </span>
 
       <span class="soft">
-        Others may remain
-        just out of reach.
+       What changes is what you notice.
       </span>
 
     </h2>
@@ -2926,9 +3321,9 @@ footer{
 
       <p>
 
-        “I can never unlove you,<br>
-        but I can unweave myself
-        further away.”
+        “I didn’t lose you all at once.<br>
+       You stayed,<br>
+but differently.”
 
       </p>
 
@@ -2945,21 +3340,17 @@ footer{
         </span>
 
         <span>
-          Healing
+          Kindness
         </span>
 
       </div>
 
+<p>
 
-      <p>
+I liked you for how kind you were.<br>
+I just wish you were as kind to yourself.
 
-        “Maybe the scars do
-        remain forever.<br>
-        We simply learn to grow
-        around them.”
-
-      </p>
-
+</p>
     </article>
 
 
@@ -3188,12 +3579,11 @@ footer{
       <div>
 
         <h3>
-          Memory
+         Home
         </h3>
 
         <p>
-          The people and moments that remain
-          long after they leave.
+          Learning that home can be something you carry within yourself.
         </p>
 
       </div>
@@ -3215,12 +3605,11 @@ footer{
       <div>
 
         <h3>
-          Hope
+        Silence
         </h3>
 
         <p>
-          The choice to keep arriving,
-          even when the day feels heavy.
+The words left unsaid, the spaces between people, and what silence learns to carry.
         </p>
 
       </div>
@@ -3262,18 +3651,16 @@ footer{
   </div>
 
 
-  <div class="author-grid">
+<div class="author-art reveal">
 
+  <div class="author-photo">
+    <img
+      src="vijaya-suriya.jpg"
+      alt="Vijaya Suriya"
+    >
+  </div>
 
-    <div class="author-art reveal">
-
-      <div class="author-moon"></div>
-
-      <span class="author-initials">
-        VS
-      </span>
-
-    </div>
+</div>
 
 
     <div class="author-copy reveal delay-1">
@@ -3414,6 +3801,7 @@ footer{
      PURCHASE
 ======================================================= -->
 
+```html
 <section
   class="section buy"
   id="buy"
@@ -3482,7 +3870,8 @@ footer{
 
       <div class="purchase-buttons">
 
-        <!-- AMAZON -->
+
+                <!-- 1 · AMAZON INDIA -->
 
         <a
           href="https://amzn.in/d/0eejUFqa"
@@ -3490,9 +3879,50 @@ footer{
           rel="noopener"
           class="btn btn-dark"
         >
-          Buy on Amazon
+         Buy in India
           <span>↗</span>
         </a>
+
+
+
+
+        <!-- 2 · USA -->
+
+        <a
+          href="https://www.amazon.com/dp/B0GLZSGW4M"
+          target="_blank"
+          rel="noopener"
+          class="btn btn-dark"
+        >
+          Buy in USA
+          <span>↗</span>
+        </a>
+
+
+        <!-- 3 · UK -->
+
+        <a
+          href="https://www.amazon.co.uk/Moon-That-Listens-Vijaya-Suriya/dp/B0GLZSGW4M"
+          target="_blank"
+          rel="noopener"
+          class="btn btn-dark"
+        >
+          Buy in UK
+          <span>↗</span>
+        </a>
+
+                <!-- 4 · INDIA -->
+
+        <a
+          href="https://direct.notionpress.com/in/read/to-the-moon-that-listens"
+          target="_blank"
+          rel="noopener"
+          class="btn btn-dark"
+        >
+          Buy on Notion Press
+          <span>↗</span>
+        </a>
+
 
 
 
@@ -3506,6 +3936,7 @@ footer{
 
 
 </section>
+```
 
 
 
@@ -4117,6 +4548,209 @@ cover.addEventListener(
 
 </script>
 
+
+
+<script>
+/* =========================================================
+   CINEMATIC ENHANCEMENT ENGINE
+   Does not alter the existing page structure/content.
+   ========================================================= */
+(function(){
+  const body = document.body;
+
+  /* Atmospheric layers */
+  const vignette = document.createElement('div');
+  vignette.className = 'cine-vignette';
+  body.appendChild(vignette);
+
+  const flare = document.createElement('div');
+  flare.className = 'cine-flare';
+  body.appendChild(flare);
+
+  body.classList.add('cine-bars');
+
+  /* Smooth cinematic cursor illumination */
+  const glow = document.querySelector('.cursor-glow');
+  let mx = innerWidth/2, my = innerHeight/2;
+  let gx = mx, gy = my;
+
+  if (matchMedia('(pointer:fine)').matches && glow){
+    addEventListener('pointermove', e=>{
+      mx=e.clientX; my=e.clientY;
+      glow.style.opacity='.82';
+    }, {passive:true});
+
+    addEventListener('pointerleave', ()=>{
+      glow.style.opacity='0';
+    });
+
+    function glowLoop(){
+      gx += (mx-gx)*.075;
+      gy += (my-gy)*.075;
+      glow.style.left=gx+'px';
+      glow.style.top=gy+'px';
+      requestAnimationFrame(glowLoop);
+    }
+    glowLoop();
+  }
+
+  /* Scroll direction + cinematic parallax */
+  let lastY=scrollY;
+  let ticking=false;
+
+  function cinematicScroll(){
+    const y=scrollY;
+    body.classList.add('cine-scrolling');
+
+    const moon=document.querySelector('.hero-moon');
+    const book=document.querySelector('.book-wrap');
+
+    if (moon && innerWidth>900){
+      const heroProgress=Math.min(Math.max(y/innerHeight,0),1);
+      moon.style.transform =
+        'translate3d(0,' + (-10 + heroProgress*42) + 'px,0) scale(' +
+        (1 + heroProgress*.035) + ')';
+    }
+
+    if (book && innerWidth>900){
+      const heroProgress=Math.min(Math.max(y/innerHeight,0),1);
+      book.style.transform =
+        'rotate(' + (4-heroProgress*2.2) + 'deg) translate3d(0,' +
+        (30+heroProgress*55) + 'px,0) scale(' +
+        (1-heroProgress*.018) + ')';
+    }
+
+    lastY=y;
+    ticking=false;
+  }
+
+  addEventListener('scroll', ()=>{
+    if(!ticking){
+      requestAnimationFrame(cinematicScroll);
+      ticking=true;
+    }
+  }, {passive:true});
+
+  /* Hero pointer depth — restrained, not a redesign */
+  const hero=document.querySelector('.hero');
+  const heroCopy=document.querySelector('.hero-copy');
+  const heroBook=document.querySelector('.hero-book');
+
+  if(hero && matchMedia('(pointer:fine)').matches){
+    hero.addEventListener('pointermove', e=>{
+      const r=hero.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+
+      if(heroCopy)
+        heroCopy.style.transform=`translate3d(${x*-5}px,${y*-3}px,0)`;
+
+      if(heroBook)
+        heroBook.style.transform=`translate3d(${x*7}px,${y*5}px,0)`;
+
+      flare.style.left=(50+x*8)+'%';
+      flare.style.top=(34+y*8)+'%';
+    }, {passive:true});
+
+    hero.addEventListener('pointerleave', ()=>{
+      if(heroCopy) heroCopy.style.transform='';
+      if(heroBook) heroBook.style.transform='';
+      flare.style.left='50%';
+      flare.style.top='34%';
+    });
+  }
+
+  /* Floating-word depth */
+  const words=[...document.querySelectorAll('.floating-word')];
+  if(words.length){
+    addEventListener('pointermove', e=>{
+      const cx=innerWidth/2, cy=innerHeight/2;
+      const dx=(e.clientX-cx)/innerWidth;
+      const dy=(e.clientY-cy)/innerHeight;
+      words.forEach((word,i)=>{
+        const depth=(i%3+1)*4;
+        word.style.transform=`translate3d(${dx*depth}px,${dy*depth}px,0)`;
+      });
+    }, {passive:true});
+  }
+
+  /* Cinematic active section illumination */
+  const sections=[...document.querySelectorAll('main > section')];
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('cine-active');
+      }
+    });
+  }, {threshold:.12});
+  sections.forEach(s=>io.observe(s));
+
+  /* Make the existing reveal system feel like a film edit */
+  const revealObserver=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:.08, rootMargin:'0px 0px -7% 0px'});
+
+  document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+  /* Tiny idle ambience for stars */
+  const stars=document.querySelector('.stars');
+  if(stars){
+    let t=0;
+    function starsPulse(){
+      t+=.004;
+      stars.style.transform=`translate3d(${Math.sin(t)*4}px,${Math.cos(t*.8)*3}px,0)`;
+      requestAnimationFrame(starsPulse);
+    }
+    starsPulse();
+  }
+
+  /* Remove scroll state after motion settles */
+  let scrollTimer;
+  addEventListener('scroll',()=>{
+    clearTimeout(scrollTimer);
+    scrollTimer=setTimeout(()=>body.classList.remove('cine-scrolling'),180);
+  }, {passive:true});
+/* =========================================================
+   BOOK CLICK — RESPONSIVE LIFT
+========================================================= */
+
+const clickableBook = document.querySelector('.book-wrap');
+const bookMoon = document.querySelector('.hero-moon');
+
+if (clickableBook) {
+
+  clickableBook.addEventListener('click', () => {
+
+    if (clickableBook.classList.contains('book-lift')) {
+      return;
+    }
+
+    clickableBook.classList.add('book-lift');
+
+    if (bookMoon) {
+      bookMoon.classList.add('book-moon-active');
+    }
+
+    setTimeout(() => {
+
+      clickableBook.classList.remove('book-lift');
+
+      if (bookMoon) {
+        bookMoon.classList.remove('book-moon-active');
+      }
+
+    }, 1500);
+
+  });
+
+}
+})();
+</script>
 
 </body>
 </html>

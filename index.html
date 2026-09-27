@@ -1142,6 +1142,331 @@ section[id] { scroll-margin-top: 60px; }
 .insta-link .insta-handle { color: var(--ink); border-bottom: 1px solid rgba(17, 26, 32, .3); padding-bottom: 3px; transition: border-color .4s; }
 .insta-link:hover .insta-handle { border-color: var(--gold); }
 
+
+/* ============================================================
+   PREMIUM AUTHOR POLISH — visual refinement only
+   Uses the existing author structure/classes; no layout rewrite.
+   ============================================================ */
+
+.author-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.author-section::after {
+  content: "V.S.";
+  position: absolute;
+  right: clamp(-20px, 2vw, 28px);
+  bottom: clamp(20px, 4vw, 70px);
+  font-family: var(--serif);
+  font-size: clamp(10rem, 23vw, 22rem);
+  line-height: .7;
+  letter-spacing: -.08em;
+  color: rgba(17, 26, 32, .035);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.author-section .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.author-section .section-tag {
+  margin-bottom: clamp(54px, 7vw, 96px);
+}
+
+.author-section .section-tag span:nth-child(2) {
+  letter-spacing: .24em;
+  color: rgba(17, 26, 32, .68);
+}
+
+.author-grid {
+  position: relative;
+}
+
+.author-visual {
+  position: relative;
+}
+
+.author-visual::before {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  left: -80px;
+  top: -70px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(203,170,107,.16), transparent 68%);
+  filter: blur(12px);
+  pointer-events: none;
+}
+
+.portrait-frame {
+  border: 1px solid rgba(203, 170, 107, .20);
+  border-radius: 10px;
+  box-shadow:
+    0 50px 90px -40px rgba(17, 26, 32, .58),
+    0 0 0 1px rgba(255,255,255,.18) inset;
+  transition: transform .9s var(--ease), box-shadow .9s var(--ease);
+}
+
+.author-visual:hover .portrait-frame {
+  transform: translateY(-6px);
+  box-shadow:
+    0 65px 110px -45px rgba(17, 26, 32, .68),
+    0 0 0 1px rgba(203,170,107,.18) inset;
+}
+
+.portrait-frame::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(247,247,242,.07);
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.portrait {
+  width: 61%;
+  border-color: rgba(203,170,107,.72);
+  box-shadow:
+    0 0 0 9px rgba(6,18,28,.82),
+    0 0 0 10px rgba(203,170,107,.12),
+    0 35px 70px -24px rgba(0,0,0,.82);
+}
+
+.portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.10), transparent 38%, rgba(203,170,107,.06));
+  pointer-events: none;
+}
+
+.portrait-caption {
+  left: 28px;
+  right: 28px;
+  bottom: 26px;
+  z-index: 3;
+  padding-top: 14px;
+  border-top: 1px solid rgba(247,247,242,.12);
+  letter-spacing: .16em;
+}
+
+.author-copy {
+  position: relative;
+  padding: clamp(10px, 2vw, 24px) 0;
+}
+
+.author-copy::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 0;
+  width: 1px;
+  height: 72px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  opacity: .65;
+}
+
+.author-copy .small-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--gold);
+  letter-spacing: .28em;
+  margin-bottom: 24px;
+}
+
+.author-copy .small-label::before {
+  content: "";
+  width: 34px;
+  height: 1px;
+  background: var(--gold);
+  opacity: .75;
+}
+
+.author-copy .display {
+  margin-bottom: 30px;
+  font-size: clamp(4rem, 7vw, 6.7rem);
+  line-height: .84;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
+
+.author-copy .display em {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(17,26,32,.38);
+  background: linear-gradient(135deg, var(--ink), rgba(17,26,32,.45));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.author-copy .lead-serif {
+  position: relative;
+  max-width: 31ch;
+  margin-bottom: 30px;
+  padding-left: 22px;
+  color: #27343a;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.author-copy .lead-serif::before {
+  content: "“";
+  position: absolute;
+  left: -2px;
+  top: -.25em;
+  font-family: var(--serif);
+  font-size: 3rem;
+  line-height: 1;
+  color: rgba(203,170,107,.72);
+}
+
+.author-bio {
+  max-width: 54ch;
+  padding-top: 4px;
+}
+
+.author-bio p {
+  color: rgba(53,66,74,.88);
+  line-height: 1.75;
+}
+
+.author-bio p:last-child {
+  color: rgba(53,66,74,.66);
+}
+
+.author-work {
+  position: relative;
+  margin-top: 42px;
+  padding: 24px 22px;
+  border: 1px solid rgba(17,26,32,.12);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.46), rgba(255,255,255,.16));
+  box-shadow: 0 18px 45px -32px rgba(17,26,32,.5);
+  transition: transform .6s var(--ease), border-color .5s, box-shadow .6s;
+}
+
+.author-work:hover {
+  transform: translateY(-3px);
+  border-color: rgba(203,170,107,.42);
+  box-shadow: 0 26px 55px -32px rgba(17,26,32,.58);
+}
+
+.author-work > .mono {
+  min-width: 30px;
+  font-size: .58rem;
+  letter-spacing: .16em;
+}
+
+.work-title {
+  letter-spacing: -.01em;
+}
+
+.work-sub {
+  letter-spacing: .18em;
+}
+
+.insta-link {
+  position: relative;
+  gap: 14px;
+  margin-top: 26px;
+  padding: 5px 0;
+}
+
+.insta-link .insta-label {
+  color: rgba(53,66,74,.62);
+  letter-spacing: .22em;
+}
+
+.insta-link .insta-handle {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  letter-spacing: .02em;
+}
+
+@media (max-width: 900px) {
+  .author-copy {
+    padding-top: 12px;
+  }
+
+  .author-copy::before {
+    left: 0;
+    top: -8px;
+    width: 64px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  .author-copy .display {
+    font-size: clamp(3.5rem, 12vw, 5.5rem);
+  }
+
+  .author-copy .lead-serif {
+    max-width: 34ch;
+  }
+
+  .author-section::after {
+    right: -10px;
+    bottom: 30px;
+    font-size: 42vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .author-section .section-tag {
+    margin-bottom: 48px;
+  }
+
+  .portrait-frame {
+    border-radius: 8px;
+  }
+
+  .portrait-frame::after {
+    inset: 10px;
+  }
+
+  .portrait-caption {
+    left: 20px;
+    right: 20px;
+    bottom: 18px;
+    font-size: .56rem;
+  }
+
+  .author-copy .small-label {
+    margin-bottom: 20px;
+    letter-spacing: .22em;
+  }
+
+  .author-copy .display {
+    font-size: clamp(3.2rem, 17vw, 4.5rem);
+    margin-bottom: 26px;
+  }
+
+  .author-copy .lead-serif {
+    padding-left: 18px;
+    font-size: 1.35rem;
+    line-height: 1.4;
+  }
+
+  .author-work {
+    padding: 20px 18px;
+    gap: 14px;
+  }
+
+  .work-title {
+    font-size: 1.3rem;
+  }
+
+  .insta-link .insta-handle {
+    font-size: 1.05rem;
+  }
+}
+
 /* ============================================================
    INTERLUDE
    ============================================================ */
@@ -2170,7 +2495,7 @@ section[id] { scroll-margin-top: 60px; }
     <!-- 04 AUTHOR -->
     <section id="author" class="section paper author-section">
       <div class="wrap">
-        <p class="section-tag mono reveal"><span>04</span><span>Meet Vijaya Suriya</span></p>
+        <p class="section-tag mono reveal"><span>04</span><span>The Writer</span></p>
         <div class="author-grid">
           <div class="author-visual reveal">
             <div class="portrait-frame">
@@ -2181,14 +2506,14 @@ section[id] { scroll-margin-top: 60px; }
                 <img src="author.jpg" alt="Portrait of poet Vijaya Suriya" id="authorImg">
                 <span class="portrait-fallback" aria-hidden="true">V.S.</span>
               </div>
-              <p class="portrait-caption mono"><span>Poet · Writer</span><span>V.S.</span></p>
+              <p class="portrait-caption mono"><span>Poetry · Prose</span><span>V.S.</span></p>
             </div>
           </div>
 
           <div class="author-copy">
-            <p class="small-label mono reveal">The Writer</p>
+            <p class="small-label mono reveal">POET · WRITER</p>
             <h2 class="display reveal">Vijaya<br><em>Suriya</em></h2>
-            <p class="lead-serif reveal">Vijaya Suriya is a poet and writer whose work demonstrates restraint, coherence, and attentiveness to emotional nuance.</p>
+            <p class="lead-serif reveal">A poet and writer whose work demonstrates restraint, coherence, and attentiveness to emotional nuance.</p>
             <div class="author-bio reveal">
               <p>Through minimal language and natural imagery, her poems examine relationships, memory, and inner transformation.</p>
               <p><em>To the Moon That Listens</em> is her debut poetry collection.</p>

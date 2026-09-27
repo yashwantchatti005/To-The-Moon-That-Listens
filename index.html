@@ -263,6 +263,28 @@ button{font:inherit;}
 .review-card details summary::after{content:" +";}
 .review-card details[open] summary::after{content:" –";}
 .review-card details[open] summary{margin-bottom:10px;display:block;}
+
+.rating-summary{position:relative;z-index:1;max-width:760px;margin:0 auto 66px;display:flex;align-items:center;justify-content:center;gap:clamp(30px,6vw,64px);flex-wrap:wrap;}
+.rating-score-block{text-align:center;}
+.rating-score{font-family:var(--serif);font-weight:400;font-size:clamp(68px,8vw,96px);line-height:.82;background:linear-gradient(135deg,#f4eee0,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.rating-stars-row{display:flex;justify-content:center;gap:3px;margin-top:14px;font-size:16px;letter-spacing:2px;color:var(--gold);}
+.rating-stars-row .star-empty{color:rgba(255,255,255,.16);}
+.rating-score-label{margin-top:13px;font-family:var(--mono);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:#7c8f9a;}
+.rating-divider{width:1px;height:96px;background:rgba(255,255,255,.12);}
+.rating-bars{display:grid;gap:9px;width:240px;}
+.rating-bar-row{display:grid;grid-template-columns:32px 1fr 30px;align-items:center;gap:11px;font-family:var(--mono);font-size:8px;letter-spacing:.06em;color:#8797a1;}
+.rating-bar-track{height:5px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden;}
+.rating-bar-fill{display:block;height:100%;border-radius:3px;background:linear-gradient(90deg,var(--gold),#eeeae0);}
+.rating-bar-pct{text-align:right;}
+
+.review-stars{display:flex;gap:2px;margin-bottom:12px;font-size:12px;letter-spacing:1.5px;color:var(--gold);}
+.review-stars .star-empty{color:rgba(255,255,255,.16);}
+.review-name-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:5px;}
+.review-name{font-family:var(--sans);font-size:12.5px;font-weight:500;letter-spacing:.01em;color:#eee9dc;}
+.review-verified{font-family:var(--mono);font-size:6.3px;letter-spacing:.1em;text-transform:uppercase;color:#8fb89a;padding:2.5px 7px;border:1px solid rgba(143,184,154,.4);border-radius:20px;white-space:nowrap;}
+.review-submeta{font-family:var(--mono);font-size:6.5px;letter-spacing:.1em;text-transform:uppercase;color:#5c707c;margin-bottom:3px;}
+@media(max-width:620px){.rating-summary{gap:26px;margin-bottom:46px;}.rating-divider{display:none;}.rating-bars{width:100%;max-width:280px;}}
+
 @media(max-width:900px){.reviews-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:620px){.reviews-heading{margin:50px auto 40px;}.reviews-grid{grid-template-columns:1fr;}.review-card{padding:36px 24px 26px;}.review-title{font-size:22px;}}
 
@@ -691,48 +713,93 @@ body.cine-scrolling .stars{opacity:.9;}
     <p class="kicker">In their own words</p>
     <h2>Readers who<em> stayed.</em></h2>
     <p class="reviews-sub">Some books are read. Some are felt. These are the words readers left behind.</p>
-    <p class="reviews-count">9 global ratings</p>
   </div>
+
+  <div class="rating-summary reveal">
+    <div class="rating-score-block">
+      <div class="rating-score">4.9</div>
+      <div class="rating-stars-row" aria-hidden="true">★★★★★</div>
+      <div class="rating-score-label">Out of 5 · 9 Global Ratings</div>
+    </div>
+    <div class="rating-divider"></div>
+    <div class="rating-bars">
+      <div class="rating-bar-row"><span>5 star</span><span class="rating-bar-track"><span class="rating-bar-fill" style="width:87%"></span></span><span class="rating-bar-pct">87%</span></div>
+      <div class="rating-bar-row"><span>4 star</span><span class="rating-bar-track"><span class="rating-bar-fill" style="width:13%"></span></span><span class="rating-bar-pct">13%</span></div>
+      <div class="rating-bar-row"><span>3 star</span><span class="rating-bar-track"><span class="rating-bar-fill" style="width:0%"></span></span><span class="rating-bar-pct">0%</span></div>
+      <div class="rating-bar-row"><span>2 star</span><span class="rating-bar-track"><span class="rating-bar-fill" style="width:0%"></span></span><span class="rating-bar-pct">0%</span></div>
+      <div class="rating-bar-row"><span>1 star</span><span class="rating-bar-track"><span class="rating-bar-fill" style="width:0%"></span></span><span class="rating-bar-pct">0%</span></div>
+    </div>
+  </div>
+
   <div class="reviews-grid reveal delay-1">
     <article class="review-card">
+      <div class="review-stars" aria-hidden="true">★★★★★</div>
       <p class="review-title">A Great Read</p>
-      <p class="review-attr">— A Reader</p>
+      <p class="review-body">This book reflects passion, dedication, and creativity. The writing connects emotionally and leaves a strong impression. A great start for a promising author. Wishing her continued success!</p>
+      <div class="review-name-row"><span class="review-name">Konda Sai Sreekar Reddy</span><span class="review-verified">Verified Purchase</span></div>
+      <p class="review-submeta">Hardcover · India · 10 Feb 2026</p>
     </article>
+
     <article class="review-card">
+      <div class="review-stars" aria-hidden="true">★★★★★</div>
       <p class="review-title">Simple poems, Deep feelings</p>
-      <p class="review-attr">— A Reader</p>
+      <p class="review-body">Simple poems but with so much depth. This book felt like a warm hug! The beauty of this book lies in its simplicity.</p>
+      <div class="review-name-row"><span class="review-name">Yuvaraj</span><span class="review-verified">Verified Purchase</span></div>
+      <p class="review-submeta">Hardcover · India · 10 Feb 2026</p>
     </article>
+
     <article class="review-card">
+      <div class="review-stars" aria-hidden="true">★★★★★</div>
       <p class="review-title">Loved it</p>
-      <p class="review-attr">— A Reader</p>
+      <p class="review-body">A book for everyone who walked through fire and bloomed anyway, learning to love yourself along the way.</p>
+      <div class="review-name-row"><span class="review-name">Aylaalin</span><span class="review-verified">Verified Purchase</span></div>
+      <p class="review-submeta">Hardcover · India · 12 Feb 2026</p>
     </article>
+
     <article class="review-card">
+      <div class="review-stars" aria-hidden="true">★★★★<span class="star-empty">★</span></div>
       <p class="review-title">Simple, relatable and relevant!</p>
-      <p class="review-attr">— A Reader</p>
+      <details>
+        <summary>Read full review</summary>
+        <p class="review-body">A promising debut for the new author into the world of poetry. The author captures deep, complex emotions with simple words, making her work resonate with a wide range of readers. From brief couplets to short poems, her writing carries the capacity to let each reader connect through their own lens and personal experience. This is a compelling collection showing a lot of promise.</p>
+      </details>
+      <div class="review-name-row"><span class="review-name">Anand G</span></div>
+      <p class="review-submeta">Paperback · India · 4 May 2026</p>
     </article>
+
     <article class="review-card">
+      <div class="review-stars" aria-hidden="true">★★★★★</div>
       <p class="review-title">Favourite poetry book</p>
-      <p class="review-attr">— A Reader</p>
+      <p class="review-body">It is honest, simple and comes from the heart. Loved it!!!!</p>
+      <div class="review-name-row"><span class="review-name">Greegha Green</span><span class="review-verified">Verified Purchase</span></div>
+      <p class="review-submeta">Paperback · India · 10 Feb 2026</p>
     </article>
+
     <article class="review-card">
+      <div class="review-stars" aria-hidden="true">★★★★★</div>
       <p class="review-title">A Beautiful and Heartfelt Read! 🌙❤️</p>
-      <details>
-        <summary>Read more</summary>
-        <p class="review-body">Simple poems but with so much depth. This book felt like a warm hug! The beauty of this book lies in its simplicity.</p>
-      </details>
-      <p class="review-attr">— A Reader</p>
+      <p class="review-body">To the Moon That Listens beautifully captures love, emotions, memories, and longing in simple yet touching words. A calm, relatable book that makes you pause and reflect. 🫴🏻♥️</p>
+      <div class="review-name-row"><span class="review-name">Yaswanth Chatti</span></div>
+      <p class="review-submeta">Paperback · India · 10 Sep 2026</p>
     </article>
+
     <article class="review-card">
+      <div class="review-stars" aria-hidden="true">★★★★★</div>
       <p class="review-title">Extremely relatable and beautifully written poetry</p>
-      <details>
-        <summary>Read more</summary>
-        <p class="review-body">This book reflects passion, dedication, and creativity. The writing connects emotionally and leaves a strong impression.</p>
-      </details>
-      <p class="review-attr">— A Reader</p>
+      <p class="review-body">Loved this book! Especially how relatable each and every poem felt. They're all different in their own way, but somehow every one of them felt close to my heart. Must read!</p>
+      <div class="review-name-row"><span class="review-name">Sruthi</span></div>
+      <p class="review-submeta">Paperback · India · 24 Feb 2026</p>
     </article>
+
     <article class="review-card">
-      <p class="review-title">Truly felt seen♥️</p>
-      <p class="review-attr">— A Reader</p>
+      <div class="review-stars" aria-hidden="true">★★★★★</div>
+      <p class="review-title">Truly felt seen ♥️</p>
+      <details>
+        <summary>Read full review</summary>
+        <p class="review-body">It was a quick read but surely not something you will forget about — I kept coming back to the book because some lines hit harder & deeper than others. Every page was a safe place. Not dramatic, but it will sit with you and make you understand feelings hidden deep inside you. It carries love, longing, heartbreak, exhaustion, hope, and the strange feeling of not being okay while still trying to be — you will feel seen.</p>
+      </details>
+      <div class="review-name-row"><span class="review-name">Pri</span></div>
+      <p class="review-submeta">Paperback · India · 21 Feb 2026</p>
     </article>
   </div>
 </section>

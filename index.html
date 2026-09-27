@@ -54,11 +54,19 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+
+  /* Keep normal vertical scrolling, but stop mobile browsers from
+     turning a downward pull at the top into a page refresh. */
+  overscroll-behavior-y: none;
+  touch-action: pan-y;
 }
 
 body {
   margin: 0;
   background: var(--deep);
+
+  /* Prevent browser-level pull-to-refresh while preserving page scroll. */
+  overscroll-behavior-y: none;
   color: var(--white);
   font-family: var(--sans);
   font-weight: 300;
@@ -3070,6 +3078,56 @@ section[id] { scroll-margin-top: 60px; }
     }
     return '';
   }
+
+  /* ------------------------------------------------------------
+     MOBILE PULL-TO-REFRESH GUARD
+     ------------------------------------------------------------
+     Normal vertical scrolling remains enabled. Only the specific
+     gesture that starts at the very top and pulls downward is
+     cancelled, so the browser cannot reload the page accidentally.
+     ------------------------------------------------------------ */
+  (function preventMobilePullToRefresh() {
+    let touchStartY = 0;
+    let guarding = false;
+
+    document.addEventListener('touchstart', (e) => {
+      if (!e.touches || !e.touches.length) return;
+      touchStartY = e.touches[0].clientY;
+
+      const scrollTop =
+        window.scrollY ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+
+      guarding = scrollTop <= 0;
+    }, { passive: true });
+
+    document.addEventListener('touchmove', (e) => {
+      if (!guarding || !e.touches || !e.touches.length) return;
+
+      const currentY = e.touches[0].clientY;
+      const pullingDown = currentY > touchStartY + 2;
+
+      const scrollTop =
+        window.scrollY ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+
+      if (pullingDown && scrollTop <= 0) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    document.addEventListener('touchend', () => {
+      guarding = false;
+    }, { passive: true });
+
+    document.addEventListener('touchcancel', () => {
+      guarding = false;
+    }, { passive: true });
+  })();
 
   /* ------------------------------------------------------------
      BOOK READER — behaviour

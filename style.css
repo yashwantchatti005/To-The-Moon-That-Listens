@@ -1748,11 +1748,49 @@ html:not(.js) .b-f { width: var(--w); }
   .poems { grid-template-columns: 1fr; }
   .rating { grid-template-columns: 1fr; gap: 36px; }
   .rating-bars { justify-self: stretch; max-width: none; }
-  .revs { columns: 1; }
   .foot-inner { flex-direction: column; align-items: flex-start; }
 }
 
 @media (max-width: 560px) {
+  /* Reviews: horizontal swipe carousel on phones */
+  .revs {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-right: calc(var(--pad) * -1);
+    padding-right: var(--pad);
+    padding-bottom: 14px;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    overscroll-behavior-x: contain;
+  }
+
+  .revs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rev-wrap {
+    flex: 0 0 84vw;
+    max-width: 360px;
+    min-width: 0;
+    margin-bottom: 0;
+    break-inside: auto;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .rev {
+    height: 100%;
+  }
+
+  .rev-wrap.reveal {
+    transform: none;
+  }
+
   .hero-cta { flex-direction: column; align-items: stretch; }
   .hero-cta .btn { justify-content: space-between; }
   .hero-tags { gap: 12px; }

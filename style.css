@@ -2209,3 +2209,71 @@ html:not(.js) .b-f { width: var(--w); }
 @media (max-height: 560px) {
   .reader-hint { display: none; }
 }
+/* MOBILE: horizontal swipe carousel for "Words that stay." excerpts */
+@media (max-width: 900px) {
+  .poems {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-inline: calc(var(--pad) * -1);
+    padding-inline: var(--pad);
+    padding-bottom: 14px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .poems::-webkit-scrollbar { display: none; }
+
+  .poems > .reveal,
+  .poems > .reveal:first-child {
+    flex: 0 0 min(82vw, 420px);
+    width: min(82vw, 420px);
+    min-width: min(82vw, 420px);
+    grid-column: auto;
+    display: flex;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .poems > .reveal > .poem-card,
+  .poems > .reveal:first-child > .poem-card {
+    width: 100%;
+    min-height: 330px;
+  }
+
+  .poem-lg {
+    min-height: 390px !important;
+    padding: 32px !important;
+  }
+
+  .poem-lg .pc-text {
+    font-size: clamp(34px, 9vw, 52px);
+  }
+
+  .poem-card {
+    padding: 28px;
+  }
+
+  .pc-text {
+    font-size: clamp(25px, 7vw, 34px);
+  }
+}
+
+@media (max-width: 560px) {
+  .poems {
+    gap: 14px;
+  }
+
+  .poems > .reveal,
+  .poems > .reveal:first-child {
+    flex-basis: 84vw;
+    width: 84vw;
+    min-width: 84vw;
+  }
+
+  .poem-lg {
+    min-height: 380px !important;
+  }
+}

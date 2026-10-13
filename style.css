@@ -2277,3 +2277,112 @@ html:not(.js) .b-f { width: var(--w); }
     min-height: 380px !important;
   }
 }
+/* ───────── CLOSING POEM — load AFTER style.css ───────── */
+.closing .closing-poem {
+  position: relative;
+  margin: clamp(1.5rem, 4vw, 3rem) auto clamp(2rem, 5vw, 3.5rem);
+  padding: 0 1rem;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 300;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* soft vertical thread that ties the whole poem together */
+.closing .closing-poem::before {
+  content: "";
+  position: absolute;
+  top: -2.5rem;
+  left: 50%;
+  width: 1px;
+  height: 2rem;
+  background: linear-gradient(to bottom, transparent, rgba(217, 184, 115, 0.7));
+}
+
+.closing .cp-line {
+  display: block;
+  font-size: clamp(1.35rem, 3.4vw, 2.25rem);
+  line-height: 1.5;
+  color: rgba(226, 236, 246, 0.8);
+  text-wrap: balance;
+}
+.closing .cp-line em {
+  font-style: italic;
+  color: #f1e3bd;
+}
+/* lines grow slightly brighter as the poem moves toward its end */
+.closing .cp-line:nth-child(1) { --o: 0.62; opacity: var(--o); }
+.closing .cp-line:nth-child(2) { --o: 0.74; opacity: var(--o); }
+.closing .cp-line:nth-child(3) { --o: 0.86; opacity: var(--o); }
+.closing .cp-line:nth-child(4) { --o: 1; opacity: var(--o); margin-bottom: clamp(1.6rem, 4vw, 2.6rem); }
+
+/* "and still," flanked by fine gold rules */
+.closing .cp-and {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-style: italic;
+  font-size: clamp(1.2rem, 2.6vw, 1.7rem);
+  color: #d9b873;
+  letter-spacing: 0.08em;
+  margin-bottom: clamp(0.4rem, 1.5vw, 0.9rem);
+}
+.closing .cp-and::before,
+.closing .cp-and::after {
+  content: "";
+  width: clamp(2rem, 8vw, 4.5rem);
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(217, 184, 115, 0.8));
+}
+.closing .cp-and::after { transform: scaleX(-1); }
+
+/* the payoff */
+.closing .cp-final {
+  display: block;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(3.4rem, 12vw, 8rem);
+  line-height: 1.05;
+  padding: 0.05em 0.1em 0.12em;
+  background: linear-gradient(100deg, #fff4d6 0%, #e9cd8c 30%, #c99c52 55%, #f6e3b0 80%, #fff4d6 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  filter: drop-shadow(0 0 26px rgba(217, 184, 115, 0.32));
+  animation: cpShimmer 7s ease-in-out infinite alternate;
+}
+@keyframes cpShimmer {
+  from { background-position: 0% 50%; }
+  to   { background-position: 100% 50%; }
+}
+
+/* scroll-driven line-by-line reveal (modern browsers); others just show it */
+@supports (animation-timeline: view()) {
+  .closing .cp-line,
+  .closing .cp-and {
+    animation: cpIn linear both;
+    animation-timeline: view();
+    animation-range: entry 5% cover 32%;
+  }
+  .closing .cp-final {
+    animation: cpIn linear both, cpShimmer 7s ease-in-out infinite alternate;
+    animation-timeline: view(), auto;
+    animation-range: entry 5% cover 38%, normal;
+  }
+}
+@keyframes cpIn {
+  from { opacity: 0; transform: translateY(26px); filter: blur(8px); }
+  to   { opacity: var(--o, 1); transform: none; filter: blur(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .closing .cp-line, .closing .cp-and, .closing .cp-final { animation: none !important; }
+}
+

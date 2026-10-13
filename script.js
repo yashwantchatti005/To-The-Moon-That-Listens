@@ -23,7 +23,7 @@ function bindFallbacks(root = document) {
     const list = IMG[img.dataset.img] || [];
     let i = 0;
 
-    const fail = () => {
+    const fail = () => { 
       i += 1;
       if (i < list.length) {
         img.src = list[i];
@@ -608,10 +608,17 @@ function faceHTML(f, folio) {
         <p class="pg-label">Read slowly</p>
         <span class="pg-folio">${folio}</span>
       </div>`;
-    case "colophon":
+       case "colophon":
     default:
       return `<div class="pg">
-        <p class="pg-end-big">And still,<br><em>we remain.</em></p>
+        <p class="pg-finale">
+          <span class="fl">Like this book,</span>
+          <span class="fl">life is full of <em>almosts,</em></span>
+          <span class="fl"><em>silences,</em></span>
+          <span class="fl">and the spaces in between —</span>
+          <span class="fl-and">and still,</span>
+          <span class="fl-end">we remain.</span>
+        </p>
         <span class="pg-orn"></span>
         <p class="pg-by">Vijaya Suriya</p>
         <p class="pg-small">© 2026 Vijaya Suriya<br>Published by Notion Press</p>

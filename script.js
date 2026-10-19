@@ -608,17 +608,10 @@ function faceHTML(f, folio) {
         <p class="pg-label">Read slowly</p>
         <span class="pg-folio">${folio}</span>
       </div>`;
-       case "colophon":
+    case "colophon":
     default:
       return `<div class="pg">
-        <p class="pg-finale">
-          <span class="fl">Like this book,</span>
-          <span class="fl">life is full of <em>almosts,</em></span>
-          <span class="fl"><em>silences,</em></span>
-          <span class="fl">and the spaces in between —</span>
-          <span class="fl-and">and still,</span>
-          <span class="fl-end">we remain.</span>
-        </p>
+        <p class="pg-end-big">And still,<br><em>we remain.</em></p>
         <span class="pg-orn"></span>
         <p class="pg-by">Vijaya Suriya</p>
         <p class="pg-small">© 2026 Vijaya Suriya<br>Published by Notion Press</p>
@@ -1036,3 +1029,35 @@ function initSite() {
 
 
 document.addEventListener('DOMContentLoaded', initSite);
+
+(() => {
+  const el = document.querySelector(".revs");
+  if (!el) return;
+  let down = false, startX = 0, startLeft = 0, moved = false;
+
+  el.addEventListener("pointerdown", (e) => {
+    if (e.pointerType !== "mouse") return; // touch already scrolls natively
+    down = true; moved = false;
+    startX = e.clientX; startLeft = el.scrollLeft;
+  });
+  window.addEventListener("pointermove", (e) => {
+    if (!down) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 4) { moved = true; el.classList.add("is-dragging"); }
+    el.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener("pointerup", () => {
+    down = false;
+    el.classList.remove("is-dragging");
+  });
+
+  // let a vertical mouse wheel scroll the row sideways while it's hovered
+  el.addEventListener("wheel", (e) => {
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+    const atStart = el.scrollLeft <= 0 && e.deltaY < 0;
+    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1 && e.deltaY > 0;
+    if (atStart || atEnd) return; // let the page scroll at the ends
+    e.preventDefault();
+    el.scrollLeft += e.deltaY;
+  }, { passive: false });
+})();

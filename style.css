@@ -2277,112 +2277,249 @@ html:not(.js) .b-f { width: var(--w); }
     min-height: 380px !important;
   }
 }
-/* ───────── CLOSING POEM — load AFTER style.css ───────── */
-.closing .closing-poem {
-  position: relative;
-  margin: clamp(1.5rem, 4vw, 3rem) auto clamp(2rem, 5vw, 3.5rem);
-  padding: 0 1rem;
-  max-width: 900px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  font-family: "Cormorant Garamond", Georgia, serif;
+/* ═══════════════════════════════════════════════════════════
+   REDESIGN LAYER — "Dusk & Silver"
+   Paste at the very end of the stylesheet.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --navy: #0d0f24;
+  --deep: #070816;
+  --soft-navy: #171a3a;
+  --paper: #ecebf3;
+  --soft-paper: #dcdae8;
+  --ink: #14152b;
+  --soft-ink: #4a4c68;
+  --white: #f6f5fb;
+  --muted: #8b8da8;
+  --light-muted: #b6b8d0;
+  --gold: #e8b4a0;            /* moonrise rose-peach */
+  --serif: "Fraunces", "Cormorant Garamond", Georgia, serif;
+  --radius: 22px;
+}
+
+/* ── softer, cleaner atmosphere ── */
+html, body { background: var(--navy); }
+.fx-grain { opacity: 0.035; animation: none; }
+.fx-vignette { background: radial-gradient(125% 105% at 50% 50%, transparent 60%, rgba(7, 8, 22, 0.5) 100%); }
+.cursor-glow { background: radial-gradient(circle, rgba(232, 180, 160, 0.13), rgba(232, 180, 160, 0.04) 42%, transparent 68%); }
+.progress { background: linear-gradient(90deg, #e8b4a0, #b9b4f0); }
+::selection { background: rgba(232, 180, 160, 0.35); }
+:focus-visible { outline-color: var(--gold); }
+
+/* ── type: Fraunces is heavier and rounder, so tighten tracking ── */
+.display, .hero-title, .statement-title, .closing-final, .th-body h3 {
+  font-optical-sizing: auto;
   font-weight: 300;
-  text-transform: none;
-  letter-spacing: 0;
+  letter-spacing: -0.035em;
+}
+.hero-title em, .display em, .closing-final em { font-style: italic; font-weight: 300; }
+.pc-text, .lead, .rev h3, .wr-t, .buy-line { font-weight: 300; }
+.pg-poem, .pg-quote, .pg-epi { font-weight: 300; }
+
+/* ── backgrounds ── */
+.loader, .mobile-menu {
+  background: radial-gradient(120% 90% at 50% 30%, #1b1f4a 0%, #0d0f24 55%, #070816 100%);
+}
+.reader {
+  background: radial-gradient(110% 90% at 50% 38%, rgba(27, 31, 74, 0.97), rgba(7, 8, 22, 0.99) 72%);
+}
+.hero-bg {
+  background:
+    radial-gradient(60% 70% at 76% 44%, rgba(112, 104, 210, 0.26), transparent 70%),
+    radial-gradient(45% 50% at 6% 92%, rgba(232, 180, 160, 0.09), transparent 70%),
+    linear-gradient(180deg, rgba(7, 8, 22, 0), rgba(7, 8, 22, 0) 70%, rgba(13, 15, 36, 0.9));
+}
+.themes-sec {
+  background:
+    radial-gradient(70% 50% at 85% 20%, rgba(40, 44, 110, 0.55), transparent 70%),
+    radial-gradient(50% 40% at 5% 90%, rgba(232, 180, 160, 0.06), transparent 70%);
+}
+.reviews-sec {
+  background:
+    radial-gradient(70% 45% at 15% 15%, rgba(40, 44, 110, 0.5), transparent 70%),
+    linear-gradient(180deg, rgba(7, 8, 22, 0), rgba(7, 8, 22, 0.55));
+}
+.interlude { background: radial-gradient(60% 55% at 50% 50%, rgba(40, 44, 110, 0.5), transparent 75%); }
+.statement::after, .p-halo {
+  background: radial-gradient(circle, rgba(232, 180, 160, 0.2), rgba(185, 180, 240, 0.06) 40%, transparent 66%);
 }
 
-/* soft vertical thread that ties the whole poem together */
-.closing .closing-poem::before {
-  content: "";
-  position: absolute;
-  top: -2.5rem;
-  left: 50%;
-  width: 1px;
-  height: 2rem;
-  background: linear-gradient(to bottom, transparent, rgba(217, 184, 115, 0.7));
+/* paper sections: cool silver, no warm specks */
+.paper {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(90% 60% at 50% 0%, rgba(255, 255, 255, 0.7), transparent 65%),
+    radial-gradient(80% 50% at 50% 100%, rgba(185, 180, 240, 0.22), transparent 70%);
+  background-size: auto;
+}
+.paper.from-dark::before { background: linear-gradient(180deg, var(--navy), rgba(13, 15, 36, 0)); }
+.dark.from-paper::before { background: linear-gradient(180deg, var(--paper), rgba(236, 235, 243, 0)); }
+.paper .sec-label .num, .pc-n, .wr-n, .pg-label b { color: #b3684f; }
+.role, .quote-card figcaption, .bl-arr { color: #b3684f; }
+.insta:hover .insta-h { color: #b3684f; }
+
+/* the moon: cooler, silvery */
+.moon { filter: saturate(0.55) hue-rotate(-8deg) brightness(1.02); }
+.moon-halo {
+  background: radial-gradient(circle, rgba(222, 224, 255, 0.24) 0%, rgba(185, 180, 240, 0.12) 26%, rgba(185, 180, 240, 0.04) 44%, transparent 66%);
 }
 
-.closing .cp-line {
-  display: block;
-  font-size: clamp(1.35rem, 3.4vw, 2.25rem);
-  line-height: 1.5;
-  color: rgba(226, 236, 246, 0.8);
-  text-wrap: balance;
+/* ── header: floating glass pill instead of full-width bar ── */
+.site-header.scrolled {
+  inset: 10px 14px auto 14px;
+  border: 1px solid rgba(246, 245, 251, 0.1);
+  border-radius: 999px;
+  padding: 10px 22px;
+  background-color: rgba(13, 15, 36, 0.62);
 }
-.closing .cp-line em {
-  font-style: italic;
-  color: #f1e3bd;
-}
-/* lines grow slightly brighter as the poem moves toward its end */
-.closing .cp-line:nth-child(1) { --o: 0.62; opacity: var(--o); }
-.closing .cp-line:nth-child(2) { --o: 0.74; opacity: var(--o); }
-.closing .cp-line:nth-child(3) { --o: 0.86; opacity: var(--o); }
-.closing .cp-line:nth-child(4) { --o: 1; opacity: var(--o); margin-bottom: clamp(1.6rem, 4vw, 2.6rem); }
+.brand-mark { border-radius: 50%; border-color: rgba(246, 245, 251, 0.5); color: var(--white); }
+.brand:hover .brand-mark { background: var(--gold); color: var(--deep); border-color: var(--gold); }
 
-/* "and still," flanked by fine gold rules */
-.closing .cp-and {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-style: italic;
-  font-size: clamp(1.2rem, 2.6vw, 1.7rem);
-  color: #d9b873;
-  letter-spacing: 0.08em;
-  margin-bottom: clamp(0.4rem, 1.5vw, 0.9rem);
-}
-.closing .cp-and::before,
-.closing .cp-and::after {
-  content: "";
-  width: clamp(2rem, 8vw, 4.5rem);
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(217, 184, 115, 0.8));
-}
-.closing .cp-and::after { transform: scaleX(-1); }
+/* ── buttons: pills ── */
+.btn, .buy-link-main { border-radius: 999px; }
+.btn { padding: 18px 30px; }
+.btn-gold { background: linear-gradient(135deg, #f0c3b0, #e8b4a0); }
+.btn-gold:hover { background: linear-gradient(135deg, #f6d0c0, #eebfae); box-shadow: 0 16px 44px -14px rgba(232, 180, 160, 0.7); }
+.btn-ghost { border-color: rgba(246, 245, 251, 0.3); }
+.btn-ink:hover { background: var(--gold); }
+.link-arrow { border-bottom-color: rgba(232, 180, 160, 0.4); }
 
-/* the payoff */
-.closing .cp-final {
-  display: block;
-  font-style: italic;
-  font-weight: 300;
-  font-size: clamp(3.4rem, 12vw, 8rem);
-  line-height: 1.05;
-  padding: 0.05em 0.1em 0.12em;
-  background: linear-gradient(100deg, #fff4d6 0%, #e9cd8c 30%, #c99c52 55%, #f6e3b0 80%, #fff4d6 100%);
-  background-size: 220% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  filter: drop-shadow(0 0 26px rgba(217, 184, 115, 0.32));
-  animation: cpShimmer 7s ease-in-out infinite alternate;
+/* ── cards: rounded, frosted ── */
+.poem-card, .quote-card, .rev, .buy-link, .work-row {
+  border-radius: var(--radius);
 }
-@keyframes cpShimmer {
-  from { background-position: 0% 50%; }
-  to   { background-position: 100% 50%; }
+.work-row { border-radius: 0; }
+.poem-card {
+  border-color: rgba(20, 21, 43, 0.1);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.4));
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
+.poem-card:hover { box-shadow: 0 34px 70px -34px rgba(40, 44, 110, 0.45), 0 0 0 1px rgba(232, 180, 160, 0.4); }
+.poem-card::before { background: linear-gradient(105deg, transparent 38%, rgba(185, 180, 240, 0.3) 50%, transparent 62%); }
+.poem-card::after { background: radial-gradient(420px circle at var(--gx) var(--gy), rgba(232, 180, 160, 0.22), transparent 60%); }
+.quote-card { border-color: rgba(20, 21, 43, 0.14); background: rgba(255, 255, 255, 0.5); }
+.quote-card::before, .quote-card::after { display: none; }
+.rev {
+  border-color: rgba(246, 245, 251, 0.1);
+  background: linear-gradient(160deg, rgba(246, 245, 251, 0.06), rgba(246, 245, 251, 0.015));
+}
+.rev:hover { border-color: rgba(232, 180, 160, 0.5); }
+.buy-link { border-color: rgba(20, 21, 43, 0.16); background: rgba(255, 255, 255, 0.55); }
+.buy-link-main { background: linear-gradient(135deg, #f0c3b0, #e8b4a0); border-color: transparent; }
 
-/* scroll-driven line-by-line reveal (modern browsers); others just show it */
-@supports (animation-timeline: view()) {
-  .closing .cp-line,
-  .closing .cp-and {
-    animation: cpIn linear both;
-    animation-timeline: view();
-    animation-range: entry 5% cover 32%;
+/* ── theme rows: gentler lines ── */
+.themes, .theme-row, .rating { border-color: rgba(246, 245, 251, 0.1); }
+.theme-row::after { background: linear-gradient(90deg, var(--gold), rgba(185, 180, 240, 0)); }
+
+/* ── portrait: ring colours follow the palette ── */
+.orbit.o1 { border-color: rgba(232, 180, 160, 0.7); }
+.orbit .dot { background: var(--gold); box-shadow: 0 0 14px 3px rgba(232, 180, 160, 0.6); }
+.p-photo { box-shadow: 0 0 0 6px var(--paper), 0 0 0 7px rgba(232, 180, 160, 0.6), 0 40px 80px -30px rgba(20, 21, 43, 0.6); }
+
+/* ── ratings & misc accents ── */
+.b-f { background: linear-gradient(90deg, #e8b4a0, #b9b4f0); }
+.fw-2 b, .fw-5 b { -webkit-text-stroke-color: rgba(232, 180, 160, 0.22); }
+.fw-4 b { color: rgba(185, 180, 240, 0.07); }
+.closing-moon-wrap .moon { filter: brightness(0.5) saturate(0.4); }
+
+/* ── book reader pages: cool paper ── */
+.face {
+  background-color: #efeef6;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 40%, rgba(70, 70, 130, 0.07));
+  background-size: auto;
+}
+.face.dark { background-color: #11143a; background-image: radial-gradient(90% 70% at 50% 30%, #232866, #0b0d28); }
+.board { background: linear-gradient(160deg, #232866, #0b0d28); }
+.pg-epi2 { color: var(--gold); }
+/* ═══════════════════════════════════════════════════════════
+   REVIEWS: horizontal scroller on desktop / tablet
+   ═══════════════════════════════════════════════════════════ */
+
+@media (min-width: 561px) {
+  .revs {
+    columns: auto;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: clamp(16px, 2vw, 28px);
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* bleed to the right edge of the screen */
+    margin-right: calc(var(--pad) * -1);
+    padding: 10px var(--pad) 26px 0;
+    scroll-snap-type: x proximity;
+    scroll-padding-left: 0;
+    overscroll-behavior-x: contain;
+    cursor: grab;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) rgba(246, 245, 251, 0.1);
   }
-  .closing .cp-final {
-    animation: cpIn linear both, cpShimmer 7s ease-in-out infinite alternate;
-    animation-timeline: view(), auto;
-    animation-range: entry 5% cover 38%, normal;
+  .revs.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+  .revs::-webkit-scrollbar { height: 4px; }
+  .revs::-webkit-scrollbar-track { background: rgba(246, 245, 251, 0.1); border-radius: 4px; }
+  .revs::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
+
+  .rev-wrap {
+    flex: 0 0 clamp(320px, 30vw, 430px);
+    margin-bottom: 0;
+    break-inside: auto;
+    scroll-snap-align: start;
+  }
+  .rev { height: 100%; }
+
+  /* cards sit off-screen to the right, so don't wait for the reveal animation */
+  .revs .rev-wrap.reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
   }
 }
-@keyframes cpIn {
-  from { opacity: 0; transform: translateY(26px); filter: blur(8px); }
-  to   { opacity: var(--o, 1); transform: none; filter: blur(0); }
+/* ═══════════════════════════════════════════════════════════
+   MOBILE HEADER / HAMBURGER FIX
+   ═══════════════════════════════════════════════════════════ */
+
+/* never let the logo squash the button, or the circle go oval */
+.brand { min-width: 0; }
+.brand-mark { flex: none; }
+.brand-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.menu-btn { flex: none; position: relative; z-index: 2; }
+
+@media (max-width: 1080px) {
+  .site-header.scrolled { padding: 10px 18px; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .closing .cp-line, .closing .cp-and, .closing .cp-final { animation: none !important; }
+@media (max-width: 560px) {
+  .site-header { gap: 12px; }
+  .site-header.scrolled {
+    inset: 8px 10px auto 10px;
+    padding: 8px 14px;
+  }
+  .brand { flex: 1 1 auto; gap: 10px; }
+  .brand-name { font-size: 14px; letter-spacing: 0; }
+  .menu-btn {
+    gap: 10px;
+    padding: 10px 0 10px 6px;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+  .burger { width: 22px; }
 }
 
+/* very small phones: icon only */
+@media (max-width: 380px) {
+  .menu-label { display: none; }
+}
+
+/* when the menu is open, drop the floating pill so it doesn't outline over the menu */
+html.menu-open .site-header,
+html.menu-open .site-header.scrolled {
+  inset: 0 0 auto 0;
+  border-color: transparent;
+  border-radius: 0;
+  padding: 20px var(--pad);
+  background-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
